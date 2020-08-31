@@ -4,7 +4,16 @@ i_list = f.readlines()
 
 d = {i_list[i].split()[0].lower() : i for i in range(len(i_list))}
 print(d)
-
+def padded_hex(number):
+    req_len = 8
+    num = str(number).split('x')[1]
+    print(num)
+    print(len(num))
+    pre_len = len(num)
+    if(req_len > pre_len):
+        string = '0x'+('0'*(req_len - pre_len)) + num
+        return string
+    return str(number)
 inp = "nop"
 output_file = open("program1.txt","w")
 while(1):
@@ -24,7 +33,8 @@ while(1):
         else:
             value = i
         instruction = instruction + value
-    instruction = hex(int(instruction,2))
+    instruction = padded_hex(hex(int(instruction,2)))
+    print(instruction)
     output_file.write(instruction)
     output_file.write("\n")
     print("Instruction = ",instruction)
